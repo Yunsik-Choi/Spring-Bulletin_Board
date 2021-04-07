@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: choiy
@@ -12,13 +13,13 @@
     <title>Title</title>
 </head>
 <body>
-    <form name="deleteForm" action="<c:url value="/board/delete"/>" method="post">
-        글 번호 : <strong>${seq}</strong><br>
-        <input type="hidden" name="seq" value="${seq}">
+    <form:form modelAttribute="boardVO" method="post">
+        글 번호 : <strong>${boardVO.seq}</strong><br>
+        <input type="hidden" name="seq" value="${boardVO.seq}">
         비밀번호 : <input type="password" name="pwd"><br>
         <input type="submit" value="삭제"><br>
         <a href="<c:url value="/board/read/${seq}"/> ">취소</a>
-    </form>
+    </form:form>
     <div>${msg}</div>
 </body>
 </html>

@@ -20,9 +20,8 @@ public class BoardController {
     private final BoardService boardService;
 
     @RequestMapping(value = "/")
-    @ResponseBody
     public String home(){
-        return "<h1>Hello</h1>";
+        return "/index";
     }
 
     @RequestMapping(value = "/board/list")
@@ -44,24 +43,23 @@ public class BoardController {
     }
 
     @PostMapping(value = "/board/write")
-    public String write(@Valid BoardVO boardVO, BindingResult bindingResult){
+    public String write(@Valid BoardVO boardVO, BindingResult bindingResult, SessionStatus sessionStatus){
         if(bindingResult.hasErrors()){
             return "/board/write";
         }
         else{
             boardService.write(boardVO);
+            sessionStatus.setComplete();
             return "redirect:/board/list";
         }
     }
 
-    @GetMapping(value = "/board/edit/{seq}")
-    public String edit(@PathVariable int seq, Model model){
-        BoardVO boardVO = boardService.read(seq);
-        model.addAttribute("boardVO",boardVO);
+    @GetMapping(value = "/board/edit")
+    public String edit(@ModelAttribute BoardVO boardVO){
         return "/board/edit";
     }
 
-    @PostMapping(value = "/board/edit/{seq}")
+    @PostMapping(value = "/board/edit")
     public String edit(@Valid @ModelAttribute BoardVO boardVO, SessionStatus sessionStatus, BindingResult result, int pwd, Model model){
         if(result.hasErrors()){
             return "/board/edit";
@@ -78,13 +76,12 @@ public class BoardController {
         return "/board/edit";
     }
 
-    @RequestMapping(value = "/board/delete/{seq}")
-    public String delete(@PathVariable int seq, Model model){
-        model.addAttribute("seq",seq);
+    @RequestMapping(value = "/board/delete")
+    public String delete(@ModelAttribute BoardVO boardVO){
         return "/board/delete";
     }
 
-    @RequestMapping(value = "/board/delete")
+    @PostMapping(value = "/board/delete")
     public String delete(int seq, int pwd, Model model){
         int rowCount;
         BoardVO boardVO = new BoardVO();

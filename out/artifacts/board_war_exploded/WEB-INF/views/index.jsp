@@ -11,6 +11,8 @@
     <title>$Title$</title>
   </head>
   <body>
-  $END$
+  Hello<br>
+  <a href="/board/list">글 목록</a><br>
+  <a href="/board/write">글 작성</a>
   </body>
 </html>
