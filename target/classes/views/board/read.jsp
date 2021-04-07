@@ -15,27 +15,28 @@
     <table border="1">
         <tr>
             <th>제목</th>
-            <th>${boardVo.title}</th>
+            <th>${boardVO.title}</th>
         </tr>
         <tr>
             <td>내용</td>
-            <td>${boardVo.content}</td>
+            <td>${boardVO.content}</td>
         </tr>
         <tr>
             <td>작성자</td>
-            <td>${boardVo.writer}</td>
+            <td>${boardVO.writer}</td>
         </tr>
         <tr>
             <td>작성일</td>
-            <td>${boardVo.regDate}</td>
+            <td>${boardVO.regDate}</td>
         </tr>
         <tr>
             <td>조회수</td>
-            <td>${boardVo.cnt}</td>
+            <td>${boardVO.cnt}</td>
         </tr>
     </table>
     <div>
-        <a href="<c:url value="/board/edit/${boardVo.seq}"/>">수정</a>
+        <a href="<c:url value="/board/edit/${boardVO.seq}"/>">수정</a>
+        <a href="<c:url value="/board/delete/${boardVO.seq}"/>">삭제</a>
         <a href="<c:url value="/board/list"/>">목록</a>
     </div>
 </body>
